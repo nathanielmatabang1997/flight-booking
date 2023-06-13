@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flight Booking</title>
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:wght@400;500;700&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header class="container">
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About Us</a></li>
+                <li><a target="_blank">Contact</a></li>
+                <li><a class="active" href="#">Sign Up</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main class="main-content container">
+
+        <div id="booking" class="booking-form">
+            <h3>Booking Flights</h3>
+            <div class="input-group">
+                <label for="">Flying From</label>
+                <input class="inp-style" type="text" name="" placeholder="INPUT DESTINATION">
+            </div>
+            <div class="input-group">
+                <label for="">Flying To</label>
+                <input class="inp-style" type="text" name="" placeholder="INPUT DESTINATION">
+            </div>
+            <div class="inputs">
+                <div class="input-group">
+                    <label" for="">Departure</label>
+                        <input class="inp-style" type="date" name="">
+                </div>
+                <div class="input-group">
+                    <label for="">Return</label>
+                    <input class="inp-style" type="date" name="">
+                </div>
+            </div>
+            <div class="input-group f-class">
+                <div>
+                    <label for="">First Class (&#8369 150)</label>
+                    <input id="firstClassFly-count" class="inp-style inp-width" type="number" name="" value="1">
+                </div>
+                <div>
+                    <button onclick="clickHandler('firstClassFly', true)" class="plus-minus-btn">+</button>
+                    <button onclick="clickHandler('firstClassFly', false)" class="plus-minus-btn">-</button>
+                </div>
+            </div>
+
+            <div class="input-group f-class">
+                <div>
+                    <label for="">Economy (&#8369 100)</label>
+                    <input id="economyClassFly-count" class="inp-style inp-width" type="number" name="" value="1">
+                </div>
+                <div>
+                    <button onclick="clickHandler('economyClassFly', true)" class="plus-minus-btn">+</button>
+                    <button onclick="clickHandler('economyClassFly', false)" class="plus-minus-btn">-</button>
+                </div>
+            </div>
+            <div class="calculations">
+                <div>
+
+                </div>
+                <div class="amount">
+                    <div class="left">
+                        <p>Subtotal</p>
+                    </div>
+                    <div class="right">
+                        <p id="subTotal">&#8369 250.00</p>
+                    </div>
+                </div>
+
+                <div class="amount">
+                    <div class="left">
+                        <p>Charge 10% VAT</p>
+                    </div>
+                    <div class="right">
+                        <p id="vat-tax">&#8369 25.00</p>
+                    </div>
+                </div>
+                <hr>
+                <div class="amount">
+                    <div class="left">
+                        <h4>Total</h4>
+                    </div>
+                    <div class="right">
+                        <p id="total-price">&#8369 275</p>
+                    </div>
+                </div>
+            </div>
+            <button onclick="bookNowBtn()" class="btn-style">Book Now</button>
+        </div>
+
+
+        <div id="calculation" class="calculations">
+            <h2>Invoice</h2>
+            <div class="invoice">
+                <div class="amount">
+                    <div class="left">
+                        <p>First Class (&#8369 150)</p>
+                    </div>
+                    <div class="right">
+                        <p id="next-firstClassFly-count">1</p>
+                    </div>
+                </div>
+                <div class="amount">
+                    <div class="left">
+                        <p>Economy (&#8369 100)</p>
+                    </div>
+                    <div class="right">
+                        <p id="next-economyClassFly-count">1</p>
+                    </div>
+                </div>
+                <hr>
+                <div class="amount">
+                    <div class="left">
+                        <p>Subtotal</p>
+                    </div>
+                    <div class="right">
+                        <p id="new-subTotal">&#8369 250.00</p>
+                    </div>
+                </div>
+
+                <div class="amount">
+                    <div class="left">
+                        <p>Charge 10% VAT</p>
+                    </div>
+                    <div class="right">
+                        <p id="newVat-tax">&#8369 25.00</p>
+                    </div>
+                </div>
+                <hr>
+                <div class="amount">
+                    <div class="left">
+                        <h4>Total</h4>
+                    </div>
+                    <div class="right">
+                        <p id="newTotal-price">&#8369 275</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div id="booking-decription" class="booking-content">
+            <h1>PROJECT IN WEBDEV2</h1>
+            <p>Airlines often offer various fare classes or ticket types that come with different levels of service and flexibility. These can include economy class, premium economy, business class, and first class. Each class has its own features, such as seat comfort, baggage allowances, in-flight amenities, and refund/change policies. Travelers can select the fare option that best suits their preferences and budget.</p>
+        </div>
+
+
+
+        <script>
+            function clickHandler(flyClasses, flyTicketQuantity) {
+
+                const flyInputs = document.getElementById(flyClasses + '-count');
+                const flyCount = parseInt(flyInputs.value);
+                let flyNewCount = flyCount;
+                if (flyTicketQuantity == true) {
+                    flyNewCount = flyCount + 1;
+                }
+                if (flyTicketQuantity == false && flyCount > 0) {
+                    flyNewCount = flyCount - 1;
+                }
+                flyInputs.value = flyNewCount;
+
+                let nextPageFlyCount = 0;
+                if (flyClasses == "firstClassFly") {
+                    nextPageFlyCount = flyNewCount;
+                }
+                if (flyClasses == "economyClassFly" && flyCount > 0) {
+                    nextPageFlyCount = flyNewCount;
+                }
+                document.getElementById('next-' + flyClasses + '-count').innerText = nextPageFlyCount;
+        
+                const subTotal = getInputfly('firstClassFly') * 150 + getInputfly('economyClassFly') * 100;
+                document.getElementById('subTotal').innerText = '₱' + subTotal;
+                document.getElementById('new-subTotal').innerText = '₱' + subTotal;
+   
+                const vatTax = subTotal * 0.1;
+                document.getElementById('vat-tax').innerText = '₱' + Math.round(vatTax);
+                document.getElementById('newVat-tax').innerText = '₱' + Math.round(vatTax);
+
+                const totalSum = vatTax + subTotal;
+                document.getElementById('total-price').innerText = '₱' + totalSum;
+                document.getElementById('newTotal-price').innerText = '₱' + totalSum;
+
+            }
+
+            function getInputfly(flyClasses) {
+                const flyNewInput = document.getElementById(flyClasses + '-count');
+                const flyNewCount = parseInt(flyNewInput.value);
+                return flyNewCount;
+            }
+            function bookNowBtn() {
+                document.getElementById('booking').style.display = 'none';
+                document.getElementById('booking-decription').style.display = 'none';
+                const purchesConfirmation = document.getElementById('calculation');
+                purchesConfirmation.style.display = 'block';
+            }
+        </script>
+</body>
+
+</html>
